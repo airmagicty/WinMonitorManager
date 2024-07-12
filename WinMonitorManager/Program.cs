@@ -84,7 +84,7 @@ namespace MonitorControlApp
             // Notify icon
             notifyIcon = new NotifyIcon();
             notifyIcon.Text = "Monitor Control";
-            notifyIcon.Icon = new System.Drawing.Icon("icon.ico"); // Path to icon
+            notifyIcon.Icon = new System.Drawing.Icon("appicon.ico"); // Path to icon
             notifyIcon.Visible = true;
             notifyIcon.DoubleClick += NotifyIcon_DoubleClick;
 
