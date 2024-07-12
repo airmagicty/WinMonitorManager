@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using WinMonitorManager.Properties;
 
 namespace MonitorControlApp
 {
@@ -28,10 +29,10 @@ namespace MonitorControlApp
             InitializeComponent();
 
             //Load settings
-            //sleepTimeBox.Text = Properties.Settings.Default.SleepTime.ToString();
-            //wakeTimeBox.Text = Properties.Settings.Default.WakeTime.ToString();
-            //cycleCheckBox.Checked = Properties.Settings.Default.Cycle;
-            //autoStartCheckBox.Checked = Properties.Settings.Default.AutoStart;
+            sleepTimeBox.Text = Settings.Default.SleepTime.ToString();
+            wakeTimeBox.Text = Settings.Default.WakeTime.ToString();
+            cycleCheckBox.Checked = Settings.Default.Cycle;
+            autoStartCheckBox.Checked = Settings.Default.AutoStart;
 
             sleepTimer = new System.Windows.Forms.Timer();
             wakeTimer = new System.Windows.Forms.Timer();
@@ -143,11 +144,11 @@ namespace MonitorControlApp
             wakeTimeBox.Enabled = false;
 
             // Save settings
-            //Properties.Settings.Default.SleepTime = int.Parse(sleepTimeBox.Text);
-            //Properties.Settings.Default.WakeTime = int.Parse(wakeTimeBox.Text);
-            //Properties.Settings.Default.Cycle = cycleCheckBox.Checked;
-            //Properties.Settings.Default.AutoStart = autoStartCheckBox.Checked;
-            //Properties.Settings.Default.Save();
+            Settings.Default.SleepTime = int.Parse(sleepTimeBox.Text);
+            Settings.Default.WakeTime = int.Parse(wakeTimeBox.Text);
+            Settings.Default.Cycle = cycleCheckBox.Checked;
+            Settings.Default.AutoStart = autoStartCheckBox.Checked;
+            Settings.Default.Save();
         }
 
         private void StopTimers()
