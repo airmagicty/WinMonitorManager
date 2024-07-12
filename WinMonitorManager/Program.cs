@@ -19,8 +19,11 @@ namespace MonitorControlApp
         private System.Windows.Forms.Timer wakeTimer;
         private System.Windows.Forms.Timer updateTimer;
         private DateTime nextSleepTime;
+
         private bool isRunning;
         private bool isPaused;
+
+        private string textBoxInfo = "Прога для автоотключения монитора";
 
         public MainForm()
         {
@@ -52,10 +55,10 @@ namespace MonitorControlApp
             this.Text = "MonitorControlApp";
             this.ClientSize = new System.Drawing.Size(300, 250);
 
-            Label sleepLabel = new Label() { Text = "Таймер отключения:", Left = 10, Top = 10, Width = 150 };
+            Label sleepLabel = new Label() { Text = "Таймер отключения(сек):", Left = 10, Top = 10, Width = 150 };
             sleepTimeBox = new TextBox() { Left = 160, Top = 10, Width = 100 };
 
-            Label wakeLabel = new Label() { Text = "Таймер сна:", Left = 10, Top = 40, Width = 150 };
+            Label wakeLabel = new Label() { Text = "Таймер сна(сек):", Left = 10, Top = 40, Width = 150 };
             wakeTimeBox = new TextBox() { Left = 160, Top = 40, Width = 100 };
 
             cycleCheckBox = new CheckBox() { Text = "Зациклить задачу отключения", Left = 10, Top = 70, Width = 200 };
@@ -67,7 +70,7 @@ namespace MonitorControlApp
             pauseButton = new Button() { Text = "Pause", Left = 120, Top = 130, Width = 100 };
             pauseButton.Click += PauseButton_Click;
 
-            infoLabel = new Label() { Text = "Информация", Left = 10, Top = 160, Width = 250 };
+            infoLabel = new Label() { Text = textBoxInfo, Left = 10, Top = 160, Width = 250 };
             createByLabel = new Label() { Text = "Create by airmagicty, 2024", Left = 10, Top = 190, Width = 250 };
 
             this.Controls.Add(sleepLabel);
@@ -157,7 +160,7 @@ namespace MonitorControlApp
 
             isRunning = false;
             startButton.Text = "Start";
-            infoLabel.Text = "Информация";
+            infoLabel.Text = textBoxInfo;
 
             sleepTimeBox.Enabled = true;
             wakeTimeBox.Enabled = true;
