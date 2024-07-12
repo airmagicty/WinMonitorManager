@@ -7,6 +7,11 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>bin\Debug\net8.0-windows\appicon.ico</ApplicationIcon>
+    <Authors>airmagicty</Authors>
+    <Description>Программа для управления питанием монитора</Description>
+    <PackageIcon>appicon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/airmagicty/WinMonitorManager</RepositoryUrl>
+    <Version>$(VersionPrefix)</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,6 +39,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Properties\appicon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
