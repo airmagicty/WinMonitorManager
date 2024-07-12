@@ -1,6 +1,6 @@
 using System;
-using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace MonitorControlApp
 {
@@ -27,7 +27,7 @@ namespace MonitorControlApp
         {
             InitializeComponent();
 
-            // Load settings
+            //Load settings
             //sleepTimeBox.Text = Properties.Settings.Default.SleepTime.ToString();
             //wakeTimeBox.Text = Properties.Settings.Default.WakeTime.ToString();
             //cycleCheckBox.Checked = Properties.Settings.Default.Cycle;
@@ -85,7 +85,7 @@ namespace MonitorControlApp
             // Notify icon
             notifyIcon = new NotifyIcon();
             notifyIcon.Text = "Monitor Control";
-            notifyIcon.Icon = new System.Drawing.Icon("src/notify.ico"); // ”кажите путь к вашей иконке
+            notifyIcon.Icon = new System.Drawing.Icon("icon.ico"); // Path to icon
             notifyIcon.Visible = true;
             notifyIcon.DoubleClick += NotifyIcon_DoubleClick;
 
@@ -193,6 +193,7 @@ namespace MonitorControlApp
         private void WakeTimer_Tick(object sender, EventArgs e)
         {
             MonitorControl.WakeMonitor();
+            MonitorControl.EmulateUserActivity();
             wakeTimer.Stop();
 
             if (cycleCheckBox.Checked)
@@ -241,18 +242,29 @@ namespace MonitorControlApp
     {
         const int WM_SYSCOMMAND = 0x0112;
         const int SC_MONITORPOWER = 0xF170;
+        const int KEYEVENTF_KEYUP = 0x0002;
+        const byte VK_CONTROL = 0x11; // Neutral button (Ctrl)
 
         [DllImport("user32.dll")]
         static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
+
         public static void SleepMonitor()
         {
-            SendMessage(Form.ActiveForm.Handle, WM_SYSCOMMAND, (IntPtr)SC_MONITORPOWER, (IntPtr)(2));
+            SendMessage(Form.ActiveForm.Handle, WM_SYSCOMMAND, (IntPtr)SC_MONITORPOWER, (IntPtr)2);
         }
 
         public static void WakeMonitor()
         {
             SendMessage(Form.ActiveForm.Handle, WM_SYSCOMMAND, (IntPtr)SC_MONITORPOWER, (IntPtr)(-1));
+        }
+
+        public static void EmulateUserActivity()
+        {
+            keybd_event(VK_CONTROL, 0, 0, UIntPtr.Zero);
+            keybd_event(VK_CONTROL, 0, KEYEVENTF_KEYUP, UIntPtr.Zero);
         }
     }
 }
