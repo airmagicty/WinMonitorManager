@@ -53,4 +53,9 @@
     <Folder Include="bin\Debug\net8.0-windows\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NuGet.Frameworks" Version="6.10.1" />
+  </ItemGroup>
+
 </Project>
